@@ -6,4 +6,6 @@ node {
     customImage.inside {
         sh 'node --version'
     }
+    
+    customImage.push()
 }
