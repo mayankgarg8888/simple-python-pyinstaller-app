@@ -1,11 +1,12 @@
 node {
     checkout scm
 
-    def customImage = docker.build("my-image:${env.BUILD_ID}")
+    docker.withRegistry('https://gitlab.spay.com:4567', '1152810a-b80e-4786-bf89-45b6fc6c31fb') {
 
-    customImage.inside {
-        sh 'node --version'
+        def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+        /* Push the container to the custom Registry */
+        customImage.push()
     }
-    
-    customImage.push()
+}
 }
